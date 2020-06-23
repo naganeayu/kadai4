@@ -1,0 +1,6 @@
+language: bash
+script:
+ - echo Hello
+ - echo Travis CI test for kadai4
+ - ./test_kadai.sh
+
