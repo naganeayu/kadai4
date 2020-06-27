@@ -10,17 +10,20 @@ ERROR_EXIT(){
 }
 
 echo "Please enter 2 parameters." > ${ans}
-./test_kadai2.sh 1 2 3 > ${result}
+
+./test_kadai.sh 1 2 3 > ${result}
 diff ${ans} ${result} || ERROR_EXIT "Err-param number check"
 
 
 echo "Both numbers should be greater than 1." > ${ans}
-./test_kadai2.sh -1 1 > ${result}
+
+./test_kadai.sh -1 1 > ${result}
 diff ${ans} ${result} || ERROR_EXIT "Err-greater than 1 check"
 
 
 echo "Both numbers should be natural numbers." > ${ans}
-./test_kadai2.sh 1 1.1 > ${result}
+
+./test_kadai.sh 1 1.1 > ${result}
 diff ${ans} ${result} || ERROR_EXIT "Err-natural number check"
 
 

@@ -1,30 +1,36 @@
 #!/bin/bash
 
-ans="/tmp/$$-ans"
-result="/tmp/$$-result"
+num1=$1
+num2=$2
 
-ERROR_EXIT(){
-	echo $1
-	rm /tmp/$$-*
+#引数の数チェック
+if [ $# -ne 2 ];then
+	echo "Please enter 2 parameters."
 	exit 1
+fi
+
+#引数の自然数チェック
+expr ${num1} + 1 > /dev/null 2>&1
+	if [ $? -ge 2 ]; then
+	echo "Both numbers should be natural numbers."
+	exit 1
+fi
+
+#引数の１以上チェック
+if [ ${num1} -lt 1 ] || [ ${num2} -lt 1 ]; then
+	echo "Both numbers shold be greater than 1."
+	exit 1
+
+fi
+
+
+
+function gcd() {
+	if (( $1 % $2 == 0 )); then
+		echo $2
+	else
+		gcd $2 $(( $1 % $2 ))
+	fi
 }
 
-echo "Please enter 2 parameters." > ${ans}
-./test_kadai2.sh 1 2 3 > ${result}
-diff ${ans} ${result} || ERROR_EXIT "Err-param number check"
-
-
-echo "Both numbers should be greater than 1." > ${ans}
-./test_kadai2.sh -1 1 > ${result}
-diff ${ans} ${result} || ERROR_EXIT "Err-greater than 1 check"
-
-
-echo "Both numbers should be natural numbers." > ${ans}
-./test_kadai2.sh 1 1.1 > ${result}
-diff ${ans} ${result} || ERROR_EXIT "Err-natural number check"
-
-
-echo "OK"
-rm /tmp/$$-*
-
-exit 0
+echo $(gcd ${num1} ${num2})
