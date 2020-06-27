@@ -1,18 +1,30 @@
 #!/bin/bash
 
-#################
-#
-#################
-result=$(./kadai.sh 2 4)
+ans="/tmp/$$-ans"
+result="/tmp/$$-result"
 
-if [ $result = 1 ]; then
-	echo "NG"
+ERROR_EXIT(){
+	echo $1
+	rm /tmp/$$-*
 	exit 1
-elif [ $result = 2 ]; then
-	echo "OK"
-	exit 0
-else
-	echo "unexpected result:"$result
-	exit 1
-fi
+}
 
+echo "Please enter 2 parameters." > ${ans}
+./test_kadai2.sh 1 2 3 > ${result}
+diff ${ans} ${result} || ERROR_EXIT "Err-param number check"
+
+
+echo "Both numbers should be greater than 1." > ${ans}
+./test_kadai2.sh -1 1 > ${result}
+diff ${ans} ${result} || ERROR_EXIT "Err-greater than 1 check"
+
+
+echo "Both numbers should be natural numbers." > ${ans}
+./test_kadai2.sh 1 1.1 > ${result}
+diff ${ans} ${result} || ERROR_EXIT "Err-natural number check"
+
+
+echo "OK"
+rm /tmp/$$-*
+
+exit 0
