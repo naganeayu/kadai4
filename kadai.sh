@@ -10,7 +10,7 @@ if [ $# -ne 2 ];then
 fi
 
 #引数の自然数チェック
-expr ${num1} + 1 > /dev/null 2>&1
+expr ${num1} + ${num2} + 1 > /dev/null 2>&1
 	if [ $? -ge 2 ]; then
 	echo "Both numbers should be natural numbers."
 	exit 1
