@@ -18,7 +18,7 @@ fi
 
 #引数の１以上チェック
 if [ ${num1} -lt 1 ] || [ ${num2} -lt 1 ]; then
-	echo "Both numbers shold be greater than 1."
+	echo "Both numbers should be greater than 1."
 	exit 1
 
 fi
